@@ -4,4 +4,13 @@ block title
     title Login
 
 block content
-    h1 Login Page
+    section
+        header
+            h1 Login Page
+        article
+            form(action="/login", method="POST")
+                label(for="username") Username
+                input(type="text", name="username", id="username", autofocus, placeholder="Enter your username")
+                label(for="password") Password
+                input(type="password", name="password", id="password", placeholder="Enter your password")
+                input(type="submit", value="Login")

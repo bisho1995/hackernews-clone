@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run test",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +26,7 @@
   },
   "homepage": "https://github.com/bisho1995/hackernews-clone#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "config": "^3.0.1",
     "connect-mongo": "^2.0.3",
@@ -33,6 +35,7 @@
     "express-session": "^1.15.6",
     "mongoose": "^5.4.0",
     "morgan": "^1.9.1",
+    "nodemon": "^1.18.9",
     "pug": "^2.0.3"
   }
 }

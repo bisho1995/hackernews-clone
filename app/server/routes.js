@@ -4,7 +4,10 @@ const Register = require("./routes/Register");
 
 module.exports = app => {
   app.get("/", Home);
+
   app.get("/login", Login.get);
   app.post("/login", Login.post);
-  app.get("/register", Register);
+
+  app.get("/register", Register.get);
+  app.post("/register", Register.post);
 };

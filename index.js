@@ -1,14 +1,15 @@
-var http = require("http");
-var express = require("express");
-var session = require("express-session");
-var bodyParser = require("body-parser");
-var cookieParser = require("cookie-parser");
-var MongoStore = require("connect-mongo")(session);
-var fs = require("fs");
-var path = require("path");
-var morgan = require("morgan");
+const http = require("http");
+const express = require("express");
+const session = require("express-session");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const MongoStore = require("connect-mongo")(session);
+const fs = require("fs");
+const path = require("path");
+const morgan = require("morgan");
+const config = require("config");
 
-var app = express();
+const app = express();
 
 app.locals.pretty = true;
 app.set("port", process.env.PORT || 3000);
@@ -16,16 +17,21 @@ app.set("views", __dirname + "/app/server/views");
 app.set("view engine", "pug");
 app.use(cookieParser());
 app.use(bodyParser.json());
-var accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
-  flags: "a"
-});
+const accessLogStream = fs.createWriteStream(
+  path.join(__dirname, "access.log"),
+  {
+    flags: "a"
+  }
+);
 app.use(morgan("combined", { stream: accessLogStream }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/app/public"));
 
-process.env.DB_HOST = process.env.DB_HOST || "localhost";
-process.env.DB_PORT = process.env.DB_PORT || 27017;
-process.env.DB_NAME = process.env.DB_NAME || "node-login";
+process.env.DB_HOST =
+  process.env.DB_HOST || config.get("DB_HOST") || "localhost";
+process.env.DB_PORT = process.env.DB_PORT || config.get("DB_HOST") || 27017;
+process.env.DB_NAME =
+  process.env.DB_NAME || config.get("DB_HOST") || "hackernews";
 
 if (app.get("env") != "live") {
   process.env.DB_URL =

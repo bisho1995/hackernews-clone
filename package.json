@@ -4,7 +4,8 @@
   "description": "A hackernews clone created in response to a challenge",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "npm run test",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,12 @@
   "bugs": {
     "url": "https://github.com/bisho1995/hackernews-clone/issues"
   },
-  "homepage": "https://github.com/bisho1995/hackernews-clone#readme"
+  "homepage": "https://github.com/bisho1995/hackernews-clone#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "connect-mongo": "^2.0.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6"
+  }
 }

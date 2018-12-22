@@ -1,3 +1,3 @@
 module.exports = function(req, res) {
-  res.status(200).send("Home Page");
+  res.status(200).render("home");
 };

@@ -3,5 +3,27 @@ extends layout
 block title
     title Hackernews clone - Node.js
 
+block styles
+    link(rel='stylesheet', href='/css/home.css')
+
 block content
-    h1 Home Page
+    section#wrapper.container-fluid
+        header.container-fluid
+            div#logo
+                img(src="https://hn.algolia.com/assets/logo-hn-search.png")
+            div
+                table
+                    tr
+                        td Bisvarup
+                    tr
+                        td Hacker News
+            div#search 
+                i.fa.fa-search.icon
+                input(type="text", name="", placeholder="Search")
+        article
+            div All the content goes here
+        footer
+            ul
+                li a
+                li b
+                li c

@@ -9,8 +9,8 @@ block content
             h1 Register Page
         article.container
             div
-                b Account could not be created due to one or more of the below errors
                 if errors 
+                    b Account could not be created due to one or more of the below errors
                     each error in errors
                         div.alert.alert-danger= error
             form(action="/register", method="post")

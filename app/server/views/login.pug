@@ -8,6 +8,12 @@ block content
         header
             h1 Login Page
         article
+            if registrationSuccess
+                div 
+                    div.alert.alert-success Registration was successful now log in
+                    br
+                    br
+        article
             form(action="/login", method="POST")
                 label(for="username") Username
                 input(type="text", name="username", id="username", autofocus, placeholder="Enter your username")

@@ -1,7 +1,7 @@
 var bcrypt = require("bcryptjs");
 const model = require("./schema");
 
-module.exports.addUser = function(username, password) {
+module.exports.addUser = function(username, email, password) {
   return new Promise((resolve, reject) => {
     bcrypt.genSalt(10, function(err, salt) {
       if (err) reject(err);
@@ -11,7 +11,8 @@ module.exports.addUser = function(username, password) {
           else {
             const user = new model({
               username,
-              password
+              email,
+              password: hash
             });
             user.save((err, doc) => {
               if (err) reject(err);
@@ -26,6 +27,21 @@ module.exports.addUser = function(username, password) {
 module.exports.usernameExists = function(username) {
   return new Promise((resolve, reject) => {
     model.find({ username }, function(err, docs) {
+      if (err) reject(err);
+      else {
+        if (docs.length) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      }
+    });
+  });
+};
+
+module.exports.emailExists = function(email) {
+  return new Promise((resolve, reject) => {
+    model.find({ email }, function(err, docs) {
       if (err) reject(err);
       else {
         if (docs.length) {

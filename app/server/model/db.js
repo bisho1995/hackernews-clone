@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+mongoose.set("useCreateIndex", true);
 const connection = mongoose.createConnection(process.env.DB_URL, {
   useNewUrlParser: true
 });

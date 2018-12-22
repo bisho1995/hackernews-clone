@@ -24,6 +24,7 @@ module.exports.addUser = function(username, email, password) {
     });
   });
 };
+
 module.exports.usernameExists = function(username) {
   return new Promise((resolve, reject) => {
     model.find({ username }, function(err, docs) {
@@ -36,6 +37,35 @@ module.exports.usernameExists = function(username) {
         }
       }
     });
+  });
+};
+
+module.exports.usernameOrEmailExists = function(user) {
+  return new Promise((resolve, reject) => {
+    model.find({ $or: [{ username: user }, { email: user }] }, function(
+      err,
+      docs
+    ) {
+      if (err) reject(err);
+      else {
+        if (docs.length) {
+          resolve(true);
+        } else {
+          resolve(false);
+        }
+      }
+    });
+  });
+};
+
+module.exports.getPassword = function(user) {
+  return new Promise((resolve, reject) => {
+    model
+      .findOne({ $or: [{ email: user }, { username: user }] })
+      .exec((err, res) => {
+        if (err) reject(err);
+        else resolve(res.password);
+      });
   });
 };
 

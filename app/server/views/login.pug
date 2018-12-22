@@ -4,19 +4,26 @@ block title
     title Login
 
 block content
-    section
+    section.container
         header
             h1 Login Page
-        article
+        div
             if registrationSuccess
                 div 
                     div.alert.alert-success Registration was successful now log in
                     br
                     br
+        div
+            if errors
+                b There were some errors in your request
+                div
+                    each error in errors
+                        div.alert.alert-danger= error
         article
             form(action="/login", method="POST")
                 label(for="username") Username
-                input(type="text", name="username", id="username", autofocus, placeholder="Enter your username")
+                input.form-control(type="text", name="username", id="username", autofocus, placeholder="Enter your username or email")
                 label(for="password") Password
-                input(type="password", name="password", id="password", placeholder="Enter your password")
-                input(type="submit", value="Login")
+                input.form-control(type="password", name="password", id="password", placeholder="Enter your password")
+                br
+                input.btn.btn-primary(type="submit", value="Login")

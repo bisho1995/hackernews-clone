@@ -22,7 +22,7 @@ module.exports.post = async function(req, res) {
 
     if (errors.length === 0) {
       await users.addUser(username, email, password);
-      res.status(200).render("login", { registrationSuccess: true });
+      res.status(200).redirect("/login");
     } else res.status(200).render("register", { errors });
   } catch (err) {
     console.log(err);

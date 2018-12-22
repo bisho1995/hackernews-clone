@@ -1,8 +1,15 @@
 const bcrypt = require("bcryptjs");
+const config = require("config");
+const jwt = require("jsonwebtoken");
 const user = require("../model/users/users");
+const helper = require("../util/helper");
 
-module.exports.get = function(req, res) {
-  res.status(200).render("login");
+module.exports.get = async function(req, res) {
+  if (await helper.routeGuard(req)) {
+    res.status(200).redirect("/");
+  } else {
+    res.status(200).render("login");
+  }
 };
 module.exports.post = async function(req, res) {
   const { username, password } = req.body;
@@ -16,8 +23,11 @@ module.exports.post = async function(req, res) {
       bcrypt.compare(password, hash, function(err, result) {
         if (result === false) errors.push("Incorrect username or password");
 
-        if (errors.length === 0) res.status(200).redirect("/");
-        else res.status(200).render("login", { errors });
+        if (errors.length === 0) {
+          const token = jwt.sign({ user: username }, config.get("SECRET"));
+          req.session.token = token;
+          res.status(200).redirect("/");
+        } else res.status(200).render("login", { errors });
       });
     }
   } catch (err) {

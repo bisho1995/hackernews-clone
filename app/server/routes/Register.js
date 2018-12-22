@@ -1,7 +1,12 @@
+const helper = require("../util/helper");
 const users = require("../model/users/users");
 
-module.exports.get = function(req, res) {
-  res.status(200).render("register");
+module.exports.get = async function(req, res) {
+  if (await helper.routeGuard(req)) {
+    res.status(200).redirect("/");
+  } else {
+    res.status(200).render("register");
+  }
 };
 module.exports.post = async function(req, res) {
   const { username, email, password, confirmPassword } = req.body;

@@ -1,5 +1,7 @@
 {
-  "DB_HOST": "localhost",
-  "DB_PORT": "27017",
-  "DB_NAME": "hackernews"
+  "DB_HOST": "ds123822.mlab.com",
+  "DB_PORT": "23822",
+  "DB_NAME": "serverguy-hackernews",
+  "DB_USERNAME": "admin",
+  "DB_PASSWORD": "password0301"
 }

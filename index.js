@@ -27,27 +27,17 @@ app.use(morgan("combined", { stream: accessLogStream }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/app/public"));
 
-process.env.DB_HOST =
-  process.env.DB_HOST || config.get("DB_HOST") || "localhost";
-process.env.DB_PORT = process.env.DB_PORT || config.get("DB_HOST") || 27017;
-process.env.DB_NAME =
-  process.env.DB_NAME || config.get("DB_HOST") || "hackernews";
+process.env.DB_HOST = process.env.DB_HOST || config.get("DB_HOST");
+process.env.DB_PORT = process.env.DB_PORT || config.get("DB_PORT");
+process.env.DB_NAME = process.env.DB_NAME || config.get("DB_NAME");
+process.env.DB_USER = process.env.DB_USER || config.get("DB_USERNAME");
+process.env.DB_PASS = process.env.DB_PASS || config.get("DB_PASSWORD");
 
-if (app.get("env") != "live") {
-  process.env.DB_URL =
-    "mongodb://" + process.env.DB_HOST + ":" + process.env.DB_PORT;
-} else {
-  // prepend url with authentication credentials //
-  process.env.DB_URL =
-    "mongodb://" +
-    process.env.DB_USER +
-    ":" +
-    process.env.DB_PASS +
-    "@" +
-    process.env.DB_HOST +
-    ":" +
-    process.env.DB_PORT;
-}
+process.env.DB_URL = `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${
+  process.env.DB_HOST
+}:${process.env.DB_PORT}/${process.env.DB_NAME}`;
+
+require("./app/server/model/db");
 
 app.use(
   session({

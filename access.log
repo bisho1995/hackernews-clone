@@ -65,3 +65,5 @@
 ::1 - - [22/Dec/2018:14:20:00 +0000] "GET /login HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
 ::1 - - [22/Dec/2018:14:20:00 +0000] "GET /css/style.css HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
 ::1 - - [22/Dec/2018:14:20:02 +0000] "POST /login HTTP/1.1" 200 10 "http://localhost:3000/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+::1 - - [22/Dec/2018:14:26:06 +0000] "GET /login HTTP/1.1" 200 1894 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"
+::1 - - [22/Dec/2018:14:26:06 +0000] "GET /css/style.css HTTP/1.1" 304 - "http://localhost:3000/login" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36"

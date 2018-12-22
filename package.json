@@ -31,6 +31,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "mongoose": "^5.4.0",
     "morgan": "^1.9.1",
     "pug": "^2.0.3"
   }

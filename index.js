@@ -4,6 +4,9 @@ var session = require("express-session");
 var bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 var MongoStore = require("connect-mongo")(session);
+var fs = require("fs");
+var path = require("path");
+var morgan = require("morgan");
 
 var app = express();
 
@@ -13,6 +16,10 @@ app.set("views", __dirname + "/app/server/views");
 app.set("view engine", "pug");
 app.use(cookieParser());
 app.use(bodyParser.json());
+var accessLogStream = fs.createWriteStream(path.join(__dirname, "access.log"), {
+  flags: "a"
+});
+app.use(morgan("combined", { stream: accessLogStream }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/app/public"));
 

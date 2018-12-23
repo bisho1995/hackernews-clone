@@ -18,8 +18,14 @@ module.exports = async (req, res) => {
             if (hit.num_comments === null) hit.num_comments = '0';
             return hit;
           });
-          console.log(data.hits);
-          res.status(200).render('home', { hits: data.hits });
+          res.status(200).render('home', {
+            hits: data.hits,
+            count: data.nbHits,
+            recordsPerPage: data.hitsPerPage,
+            pageButtonCount: 5,
+            page: data.page,
+            base_url: helper.generateURL(req.query),
+          });
         })
         .catch((err) => {
           console.log(err);

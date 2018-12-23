@@ -83,3 +83,11 @@ footer ul li {
   list-style-type: none;
   display: inline-block;
 }
+.page-item.active .page-link {
+  background: #ff742b;
+  border-color: #ff742b;
+}
+.page-link {
+  color: #ff742b;
+  font-size: 12px;
+}

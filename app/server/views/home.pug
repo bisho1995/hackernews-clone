@@ -23,18 +23,49 @@ block content
         article#content
             .container-fluid
                 each hit in hits
-                    if  hit.title
-                        div.news 
-                            h1 
-                                a(href=hit.url ,target="_blank")= hit.title
-                            div
-                                span= hit.points + " points |"
-                                span= hit.author + "|"
-                                span 2 days ago | 
-                                span= hit.num_comments + " comment |"
-                                span= " (" + hit.url ? hit.url : '#' + ")"
+                    div.news 
+                        h1 
+                            a(href=hit.url ,target="_blank")= hit.title || hit.story_text
+                        div
+                            span= hit.points + " points |"
+                            span= hit.author + " | "
+                            span 2 days ago | 
+                            span= hit.num_comments + " comment | "
+                            span= " (" + hit.url ? hit.url : '#' + ")"
         footer
-            ul
-                li a
-                li b
-                li c
+            
+            
+            -var lower_limit = (parseInt((page - 1)/pageButtonCount) * pageButtonCount) + 1
+            -var upper_limit = lower_limit * pageButtonCount;
+            -var paginationNo = lower_limit - 1
+
+            if count >= recordsPerPage
+                nav(aria-label='...', style='text-align: center')
+                    ul.pagination
+                        -if (lower_limit > 1)
+                            li.page-item 
+                                -var pageUrl =  base_url + (lower_limit - pageButtonCount);
+                                a.page-link(href=pageUrl, tabindex='-1') Previous
+                        -else
+                            li.page-item.disabled
+                                a.page-link(href='#', tabindex='-1') Previous
+                        -for (i = 1; i < pageButtonCount + 1; i++)
+
+                            -if (count > (recordsPerPage * paginationNo))
+                                -paginationNo = paginationNo + 1
+                                -var pageUrl =  base_url  + paginationNo; /*[MODIFY THIS TO SUIT YOUR USAGE]*/
+                                    -if (page != paginationNo)
+                                        li.page-item
+                                            a.page-link(href=pageUrl) #{paginationNo}
+                                    -else
+                                        li.page-item.active
+                                            a.page-link(href='#')
+                                                | #{paginationNo}
+                                                span.sr-only (current)
+                        - if (count > (recordsPerPage * upper_limit))
+                            -var pageUrl = base_url  + (upper_limit + 1) /*[MODIFY THIS TO SUIT YOUR USAGE]*/
+                            li.page-item
+                                a.page-link(href=pageUrl) Next
+                        -else
+                            li.page-item.disabled
+                                a.page-link(href='#', tabindex='-1') Next

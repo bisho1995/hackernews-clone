@@ -1,4 +1,5 @@
 const config = require('config');
+const url = require('url');
 const jwt = require('jsonwebtoken');
 const user = require('../model/users/users');
 
@@ -58,4 +59,24 @@ module.exports.fillUpQueryParams = (params, payload) => {
   }
 
   return `?query=${query}&sort=${sort}&prefix=${prefix}&page=${page}&dateRange=${dateRange}&type=${type}`;
+};
+
+module.exports.generateURL = (params, payload) => {
+  let {
+ sort, prefix, dateRange, type, query 
+} = params;
+  if (payload) {
+    sort = sort || payload.sort || '';
+    prefix = prefix || payload.prefix || '';
+    dateRange = dateRange || payload.dateRange || '';
+    type = type || payload.type || '';
+    query = query || payload.query || '';
+  } else {
+    sort = sort || '';
+    prefix = prefix || '';
+    dateRange = dateRange || '';
+    type = type || '';
+    query = query || '';
+  }
+  return `/?query=${query}&sort=${sort}&prefix=${prefix}&dateRange=${dateRange}&type=${type}&page=`;
 };

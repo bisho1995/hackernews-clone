@@ -1,6 +1,9 @@
 #wrapper {
   max-width: 1200px;
 }
+#content {
+  background: #f6f6ef;
+}
 header {
   padding: 5px;
   background: #ff742b;

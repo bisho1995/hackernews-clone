@@ -1,4 +1,5 @@
 const helper = require('../util/helper');
+const api = require('../Controllers/api');
 
 module.exports = async (req, res) => {
   if (!(await helper.routeGuard(req))) {
@@ -8,6 +9,7 @@ module.exports = async (req, res) => {
     if (!helper.hasAllQs(req.query)) {
       res.status(200).redirect(`/${helper.fillUpQueryParams(req.query)}`);
     } else {
+      api(req.query);
       res.status(200).render('home');
     }
   }

@@ -18,41 +18,44 @@ module.exports.routeGuard = async (req) => {
 
 module.exports.defaultQueryParams = () => '?sort=&prefix=&page=&dateRange=&type=';
 
-module.exports.hasAllQs = (query) => {
+module.exports.hasAllQs = (params) => {
   let b = true;
-  if (query === undefined || query === null) return false;
+  if (params === undefined || params === null) return false;
   const {
- sort, prefix, page, dateRange, type 
-} = query;
+ sort, prefix, page, dateRange, type, query 
+} = params;
   if (
     sort === undefined
     || prefix === undefined
     || page === undefined
     || dateRange === undefined
     || type === undefined
+    || query === undefined
   ) {
     b = false;
   }
   return b;
 };
 
-module.exports.fillUpQueryParams = (query, payload) => {
+module.exports.fillUpQueryParams = (params, payload) => {
   let {
- sort, prefix, page, dateRange, type 
-} = query;
+ sort, prefix, page, dateRange, type, query 
+} = params;
   if (payload) {
     sort = sort || payload.sort || '';
     prefix = prefix || payload.prefix || '';
     page = page || payload.page || '';
     dateRange = dateRange || payload.dateRange || '';
     type = type || payload.type || '';
+    query = query || payload.query || '';
   } else {
     sort = sort || '';
     prefix = prefix || '';
     page = page || '';
     dateRange = dateRange || '';
     type = type || '';
+    query = query || '';
   }
 
-  return `?sort=${sort}&prefix=${prefix}&page=${page}&dateRange=${dateRange}&type=${type}`;
+  return `?query=${query}&sort=${sort}&prefix=${prefix}&page=${page}&dateRange=${dateRange}&type=${type}`;
 };

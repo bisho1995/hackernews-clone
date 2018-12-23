@@ -1,13 +1,16 @@
-const Home = require("./routes/Home");
-const Login = require("./routes/Login");
-const Register = require("./routes/Register");
+const Home = require('./routes/Home');
+const Login = require('./routes/Login');
+const Register = require('./routes/Register');
+const Search = require('./routes/Search');
 
-module.exports = app => {
-  app.get("/", Home);
+module.exports = (app) => {
+  app.get('/', Home);
 
-  app.get("/login", Login.get);
-  app.post("/login", Login.post);
+  app.get('/login', Login.get);
+  app.post('/login', Login.post);
 
-  app.get("/register", Register.get);
-  app.post("/register", Register.post);
+  app.get('/register', Register.get);
+  app.post('/register', Register.post);
+
+  app.post('/search', Search);
 };

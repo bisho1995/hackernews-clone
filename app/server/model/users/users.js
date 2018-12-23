@@ -1,18 +1,17 @@
-var bcrypt = require("bcryptjs");
-const model = require("./schema");
+const bcrypt = require('bcryptjs');
+const model = require('./schema');
 
-module.exports.addUser = function(username, email, password) {
-  return new Promise((resolve, reject) => {
-    bcrypt.genSalt(10, function(err, salt) {
+module.exports.addUser = (username, email, password) => new Promise((resolve, reject) => {
+    bcrypt.genSalt(10, (err, salt) => {
       if (err) reject(err);
       else {
-        bcrypt.hash(password, salt, function(err, hash) {
+        bcrypt.hash(password, salt, (err, hash) => {
           if (err) reject(err);
           else {
             const user = new model({
               username,
               email,
-              password: hash
+              password: hash,
             });
             user.save((err, doc) => {
               if (err) reject(err);
@@ -23,42 +22,43 @@ module.exports.addUser = function(username, email, password) {
       }
     });
   });
-};
 
-module.exports.usernameExists = function(username) {
+module.exports.getUsername = user => new Promise((resolve, reject) => {
+    model
+      .findOne({ $or: [{ username: user }, { email: user }] })
+      .exec((err, user) => {
+        if (err) reject(err);
+        resolve(user.username);
+      });
+  });
+
+module.exports.usernameExists = function (username) {
   return new Promise((resolve, reject) => {
-    model.find({ username }, function(err, docs) {
+    model.find({ username }, (err, docs) => {
       if (err) reject(err);
-      else {
-        if (docs.length) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
+      else if (docs.length) {
+        resolve(true);
+      } else {
+        resolve(false);
       }
     });
   });
 };
 
-module.exports.usernameOrEmailExists = function(user) {
+module.exports.usernameOrEmailExists = function (user) {
   return new Promise((resolve, reject) => {
-    model.find({ $or: [{ username: user }, { email: user }] }, function(
-      err,
-      docs
-    ) {
+    model.find({ $or: [{ username: user }, { email: user }] }, (err, docs) => {
       if (err) reject(err);
-      else {
-        if (docs.length) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
+      else if (docs.length) {
+        resolve(true);
+      } else {
+        resolve(false);
       }
     });
   });
 };
 
-module.exports.getPassword = function(user) {
+module.exports.getPassword = function (user) {
   return new Promise((resolve, reject) => {
     model
       .findOne({ $or: [{ email: user }, { username: user }] })
@@ -69,24 +69,22 @@ module.exports.getPassword = function(user) {
   });
 };
 
-module.exports.emailExists = function(email) {
+module.exports.emailExists = function (email) {
   return new Promise((resolve, reject) => {
-    model.find({ email }, function(err, docs) {
+    model.find({ email }, (err, docs) => {
       if (err) reject(err);
-      else {
-        if (docs.length) {
-          resolve(true);
-        } else {
-          resolve(false);
-        }
+      else if (docs.length) {
+        resolve(true);
+      } else {
+        resolve(false);
       }
     });
   });
 };
 
-module.exports.userData = function(username) {
+module.exports.userData = function (username) {
   return new Promise((resolve, reject) => {
-    model.findOne({ username }, function(err, doc) {
+    model.findOne({ username }, (err, doc) => {
       if (err) reject(err);
       else {
         resolve(doc);

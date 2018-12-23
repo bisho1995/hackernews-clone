@@ -17,6 +17,8 @@ module.exports.routeGuard = async (req) => {
   }
 };
 
+module.exports.getUserFromJWT = token => jwt.verify(token, config.get('SECRET')).user;
+
 module.exports.defaultQueryParams = () => '?sort=&prefix=&page=&dateRange=&type=';
 
 module.exports.hasAllQs = (params) => {

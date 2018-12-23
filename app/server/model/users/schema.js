@@ -1,28 +1,28 @@
-const connection = require("../db");
 const mongoose = require("mongoose");
+const connection = require("../db");
 
 const schema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
-    required: true
+    required: true,
   },
   cookie: {
     type: String,
     required: false,
-    default: ""
+    default: '',
   },
-  history: [String]
+  history: [String],
 });
 
-const model = connection.model("users", schema);
+const model = connection.model('users', schema);
 module.exports = model;

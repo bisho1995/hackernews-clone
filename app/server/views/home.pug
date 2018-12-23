@@ -15,12 +15,14 @@ block content
             div
                 table
                     tr
-                        td Bisvarup
+                        td= username
                     tr
                         td Hacker News
             div#search 
                 i.fa.fa-search.icon
-                input(type="text", name="", placeholder="Search")
+                form(action="/search", method="post")
+                    input(type="text", name="", placeholder="Search")
+                    input(type="submit", value="Submit",style={"position":"absolute","left":"-9999px"})
         article#content
             .container-fluid
                 each hit in hits

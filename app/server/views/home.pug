@@ -10,7 +10,7 @@ block content
     section#wrapper.container-fluid
         header.container-fluid
             div#logo
-                a(href="/?query=&sort=&prefix=&dateRange=&type=&page=1")
+                a(href="/?query=&sort=&prefix=&dateRange=&type=&page=0")
                     img(src="https://hn.algolia.com/assets/logo-hn-search.png")
             div
                 table
@@ -23,12 +23,34 @@ block content
                 form(action="/search"+search_url, method="post")
                     input(type="text", name="search", placeholder="Search", value=query)
                     input(type="submit", value="Submit",style={"position":"absolute","left":"-9999px"})
+        #filters
+            span Search
+            form(action="/type", method="post")
+                select(name="type",onchange="this.form.submit()")
+                    option(value="",selected= "" == type) All
+                    option(value="story",selected= "story" == type) Story
+                    option(value="comment",selected= "comment" == type) Comment
+            span by
+            form(action="/sort", method="post")
+                select(name="sort",onchange="this.form.submit()")
+                    option(value="popularity",selected= "popularity" == sort) Popularity
+                    option(value="date",selected= "date" == sort) Date
+            span for
+            form(action="/dateRange", method="post")
+                select(name="dateRange",onchange="this.form.submit()")
+                    option(value="", selected ="" == dateRange) All Time
+                    option(value="last24h", selected ="last24h" == dateRange) Last 24 hour
+                    option(value="pastWeek", selected ="pastWeek" == dateRange) Past week
+                    option(value="pastMonth", selected ="pastMonth" == dateRange) Past month
+                    option(value="pastYear", selected ="pastYear" == dateRange) Past Year
+
         article#content
             .container-fluid
                 each hit in hits
                     div.news 
                         h1 
                             a(href=hit.url ,target="_blank")= hit.title || hit.story_text || 'No title'
+                        div= hit.comment_text || ""
                         div
                             span= hit.points + " points |"
                             span= hit.author + " | "
@@ -41,7 +63,7 @@ block content
             
             -var lower_limit = (parseInt((page - 1)/pageButtonCount) * pageButtonCount) + 1
             -var upper_limit = lower_limit * pageButtonCount;
-            -var paginationNo = lower_limit - 1
+            -var paginationNo = lower_limit - 2
 
             if count >= recordsPerPage
                 nav(aria-label='...', style='text-align: center')

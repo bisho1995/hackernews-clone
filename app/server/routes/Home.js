@@ -40,6 +40,9 @@ module.exports = async (req, res) => {
           base_url: helper.generateURLForPage(req.query),
           search_url: helper.generateURLforSearch(req.query),
           query: req.query.query,
+          type: req.query.type,
+          sort: req.query.sort,
+          dateRange: req.query.dateRange,
         });
       })
       .catch((err) => {

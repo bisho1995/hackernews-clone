@@ -1,5 +1,5 @@
 #wrapper {
-  max-width: 1200px;
+  max-width: 1100px;
 }
 #content {
   background: #f6f6ef;
@@ -100,4 +100,18 @@ footer ul li {
 }
 .page-link:hover {
   color: #ff742b;
+}
+
+#filters {
+  display: flex;
+  font-size: 13px;
+  color: #5c5c5c;
+  padding: 10px;
+}
+
+#filters form {
+  margin: 0 1rem;
+}
+#filters form select option {
+  color: #5c5c5c;
 }

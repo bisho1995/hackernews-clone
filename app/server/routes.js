@@ -2,6 +2,9 @@ const Home = require('./routes/Home');
 const Login = require('./routes/Login');
 const Register = require('./routes/Register');
 const Search = require('./routes/Search');
+const Sort = require('./routes/Sort');
+const Type = require('./routes/Type');
+const DateRange = require('./routes/DateRange');
 
 module.exports = (app) => {
   app.get('/', Home);
@@ -13,4 +16,7 @@ module.exports = (app) => {
   app.post('/register', Register.post);
 
   app.post('/search', Search);
+  app.post('/sort', Sort);
+  app.post('/type', Type);
+  app.post('/dateRange', DateRange);
 };

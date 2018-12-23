@@ -6,7 +6,7 @@ const helper = require('../util/helper');
 
 module.exports.get = async (req, res) => {
   if (await helper.routeGuard(req)) {
-    res.status(200).redirect('/');
+    res.status(200).redirect(`/${helper.defaultQueryParams()}`);
   } else {
     res.status(200).render('login');
   }

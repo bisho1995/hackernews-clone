@@ -49,6 +49,27 @@ table td {
   color: white;
 }
 
+.news {
+  padding-top: 5px;
+}
+.news h1 {
+  font-size: 14px;
+  color: black;
+  line-height: 1.25;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  text-rendering: optimizeLegibility;
+}
+.news h1 a {
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+}
+.news span {
+  font-size: 10px;
+  color: dimgray;
+}
+
 footer {
   position: relative;
 }

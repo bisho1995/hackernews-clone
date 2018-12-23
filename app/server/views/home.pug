@@ -21,8 +21,18 @@ block content
                 i.fa.fa-search.icon
                 input(type="text", name="", placeholder="Search")
         article#content
-            .container
-                div All the content goes here
+            .container-fluid
+                each hit in hits
+                    if  hit.title
+                        div.news 
+                            h1 
+                                a(href=hit.url ,target="_blank")= hit.title
+                            div
+                                span= hit.points + " points |"
+                                span= hit.author + "|"
+                                span 2 days ago | 
+                                span= hit.num_comments + " comment |"
+                                span= " (" + hit.url ? hit.url : '#' + ")"
         footer
             ul
                 li a

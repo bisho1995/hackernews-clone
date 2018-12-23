@@ -40,6 +40,7 @@ module.exports = params => new Promise((resolve, reject) => {
     const tags = type;
 
     const api = `${url}?query=${query}&tags=${tags}&numericFilters=${numericFilters}&page=${page}`;
+    console.log(api);
     axios
       .get(api)
       .then(data => data.data)

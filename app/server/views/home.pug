@@ -26,11 +26,11 @@ block content
                 each hit in hits
                     div.news 
                         h1 
-                            a(href=hit.url ,target="_blank")= hit.title || hit.story_text
+                            a(href=hit.url ,target="_blank")= hit.title || hit.story_text || 'No title'
                         div
                             span= hit.points + " points |"
                             span= hit.author + " | "
-                            span 2 days ago | 
+                            span= hit.created_at_i + " ago | "
                             span= hit.num_comments + " comment | "
                             span= " (" + hit.url ? hit.url : '#' + ")"
         footer

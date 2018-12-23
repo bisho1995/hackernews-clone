@@ -1,3 +1,4 @@
+const moment = require('moment');
 const helper = require('../util/helper');
 const api = require('../Controllers/api');
 
@@ -16,6 +17,11 @@ module.exports = async (req, res) => {
             if (hit.points === null) hit.points = '0';
             if (hit.author === null) hit.author = '';
             if (hit.num_comments === null) hit.num_comments = '0';
+            if (hit.created_at_i) {
+              hit.created_at_i = moment
+                .unix(hit.created_at_i)
+                .from(moment.now(), true);
+            }
             return hit;
           });
           res.status(200).render('home', {

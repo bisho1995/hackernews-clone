@@ -10,7 +10,8 @@ block content
     section#wrapper.container-fluid
         header.container-fluid
             div#logo
-                img(src="https://hn.algolia.com/assets/logo-hn-search.png")
+                a(href="/?query=&sort=&prefix=&dateRange=&type=&page=1")
+                    img(src="https://hn.algolia.com/assets/logo-hn-search.png")
             div
                 table
                     tr
@@ -34,6 +35,7 @@ block content
                             span= " (" + hit.url ? hit.url : '#' + ")"
         footer
             
+            br
             
             -var lower_limit = (parseInt((page - 1)/pageButtonCount) * pageButtonCount) + 1
             -var upper_limit = lower_limit * pageButtonCount;

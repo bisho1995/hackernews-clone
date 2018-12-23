@@ -24,11 +24,14 @@ header {
   display: flex;
   padding: 0.5rem;
   border-radius: 5px;
+  position: relative;
+  height: 80%;
+  top: 5px;
 }
 
 #search .icon {
   position: relative;
-  top: 4px;
+  top: 0px;
   left: 14px;
   color: #ff742b;
   font-size: 24px;
@@ -47,6 +50,7 @@ table {
 }
 table td {
   color: white;
+  font-size: 18px;
 }
 
 .news {
@@ -90,4 +94,7 @@ footer ul li {
 .page-link {
   color: #ff742b;
   font-size: 12px;
+}
+.page-link:hover {
+  color: #ff742b;
 }

@@ -20,8 +20,8 @@ block content
                         td Hacker News
             div#search 
                 i.fa.fa-search.icon
-                form(action="/search", method="post")
-                    input(type="text", name="", placeholder="Search")
+                form(action="/search"+search_url, method="post")
+                    input(type="text", name="search", placeholder="Search", value=query)
                     input(type="submit", value="Submit",style={"position":"absolute","left":"-9999px"})
         article#content
             .container-fluid

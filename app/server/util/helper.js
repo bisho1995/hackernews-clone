@@ -63,22 +63,66 @@ module.exports.fillUpQueryParams = (params, payload) => {
   return `?query=${query}&sort=${sort}&prefix=${prefix}&page=${page}&dateRange=${dateRange}&type=${type}`;
 };
 
-module.exports.generateURL = (params, payload) => {
+module.exports.generateURLForPage = (params) => {
   let {
  sort, prefix, dateRange, type, query 
 } = params;
-  if (payload) {
-    sort = sort || payload.sort || '';
-    prefix = prefix || payload.prefix || '';
-    dateRange = dateRange || payload.dateRange || '';
-    type = type || payload.type || '';
-    query = query || payload.query || '';
-  } else {
-    sort = sort || '';
-    prefix = prefix || '';
-    dateRange = dateRange || '';
-    type = type || '';
-    query = query || '';
-  }
+  sort = sort || '';
+  prefix = prefix || '';
+  dateRange = dateRange || '';
+  type = type || '';
+  query = query || '';
   return `/?query=${query}&sort=${sort}&prefix=${prefix}&dateRange=${dateRange}&type=${type}&page=`;
+};
+
+module.exports.generateURLforSearch = (params) => {
+  let {
+ sort, prefix, page, dateRange, type 
+} = params;
+  sort = sort || '';
+  prefix = prefix || '';
+  page = page || '';
+  dateRange = dateRange || '';
+  type = type || '';
+
+  return `?sort=${sort}&prefix=${prefix}&page=${page}&dateRange=${dateRange}&type=${type}&query=`;
+};
+
+module.exports.generateURLforType = (params) => {
+  let {
+ sort, prefix, page, dateRange, query 
+} = params;
+  sort = sort || '';
+  prefix = prefix || '';
+  page = page || '';
+  dateRange = dateRange || '';
+  query = query || '';
+
+  return `?sort=${sort}&prefix=${prefix}&page=${page}&dateRange=${dateRange}&query=${query}&type=`;
+};
+
+module.exports.generateURLforSort = (params) => {
+  let {
+ prefix, page, dateRange, type, query 
+} = params;
+  prefix = prefix || '';
+  page = page || '';
+  dateRange = dateRange || '';
+  query = query || '';
+  type = type || '';
+
+  return `?prefix=${prefix}&page=${page}&dateRange=${dateRange}&query=${query}&type=${type}&sort=`;
+};
+
+module.exports.generateURLforDateRange = (params) => {
+  let {
+ sort, prefix, page, type, query 
+} = params;
+  prefix = prefix || '';
+  page = page || '';
+  query = query || '';
+  type = type || '';
+  sort = sort || '';
+
+  return `?prefix=${prefix}&page=${page}&query=${query}&type=${type}&sort=${sort}&dateRange=`;
 };

@@ -36,13 +36,16 @@ header {
   color: #ff742b;
   font-size: 24px;
 }
-
+#search form {
+  width: 100%;
+}
 #search input {
   position: relative;
   flex-grow: 1;
   margin-left: 20px;
   outline: 0;
   border: 0;
+  width: 90%;
 }
 
 table {

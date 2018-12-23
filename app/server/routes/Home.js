@@ -37,7 +37,9 @@ module.exports = async (req, res) => {
           recordsPerPage: data.hitsPerPage,
           pageButtonCount: 5,
           page: data.page,
-          base_url: helper.generateURL(req.query),
+          base_url: helper.generateURLForPage(req.query),
+          search_url: helper.generateURLforSearch(req.query),
+          query: req.query.query,
         });
       })
       .catch((err) => {

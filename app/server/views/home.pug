@@ -12,17 +12,16 @@ block content
             div#logo
                 a(href="/?query=&sort=&prefix=&dateRange=&type=&page=0")
                     img(src="https://hn.algolia.com/assets/logo-hn-search.png")
-            div
-                table
-                    tr
-                        td= username
-                    tr
-                        td Hacker News
+            div.vertical-center.username= username
+                
             div#search 
                 i.fa.fa-search.icon
                 form(action="/search"+search_url, method="post")
                     input(type="text", name="search", placeholder="Search", value=query)
                     input(type="submit", value="Submit",style={"position":"absolute","left":"-9999px"})
+            div.vertical-center.history
+                a(href="/history").pull-right History
+
         #filters
             span Search
             form(action="/type", method="post")

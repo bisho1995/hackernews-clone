@@ -48,14 +48,15 @@ header {
   width: 90%;
 }
 
-table {
-  margin-left: 1rem;
-}
-table td {
+.username {
   color: white;
   font-size: 18px;
 }
-
+.history a {
+  text-decoration: none;
+  margin-left: 0.5rem;
+  color: #142e4a;
+}
 .news {
   padding-top: 5px;
 }

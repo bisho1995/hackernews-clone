@@ -1,6 +1,7 @@
 const moment = require('moment');
 const helper = require('../util/helper');
 const api = require('../Controllers/api');
+const perf = require('execution-time')();
 const userModel = require('../model/users/users');
 
 async function getUsername(token) {
@@ -10,6 +11,7 @@ async function getUsername(token) {
 }
 
 module.exports = async (req, res) => {
+  perf.start();
   if (!(await helper.routeGuard(req))) {
     res.status(200).redirect('/login');
   } else if (!helper.hasAllQs(req.query)) {
@@ -30,6 +32,7 @@ module.exports = async (req, res) => {
           }
           return hit;
         });
+        const executionTime = perf.stop();
         res.status(200).render('home', {
           username,
           hits: data.hits,
@@ -44,6 +47,7 @@ module.exports = async (req, res) => {
           sort: req.query.sort,
           dateRange: req.query.dateRange,
           queryParams: JSON.stringify(req.query),
+          executionTime: executionTime.words,
         });
       })
       .catch((err) => {

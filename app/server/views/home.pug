@@ -8,44 +8,52 @@ block styles
 
 block content
     section#wrapper.container-fluid
-        header.container-fluid
-            div#logo
-                a(href="/?query=&sort=&prefix=&dateRange=&type=&page=0")
-                    img(src="images/logo-hn-search.webp")
-            div.vertical-center.username= username
-                
-            div#search 
-                i.fa.fa-search.icon
-                form(action="/search"+search_url, method="post")
-                    input(type="hidden", name="queryParams", value=queryParams)
-                    input(type="text", name="search", placeholder="Search", value=query)
-                    input(type="submit", value="Submit",style={"position":"absolute","left":"-9999px"})
-            div.vertical-center.history
-                a(href="/history").pull-right History
+        #headerWrapper
+            header.container-fluid
+                div#logo
+                    a(href="/?query=&sort=&prefix=&dateRange=&type=&page=0")
+                        img(src="images/logo-hn-search.webp")
+                div.vertical-center.username= username
+                    
+                div#search 
+                    i.fa.fa-search.icon
+                    form(action="/search"+search_url, method="post")
+                        input(type="hidden", name="queryParams", value=queryParams)
+                        input(type="text", name="search", placeholder="Search", value=query)
+                        input(type="submit", value="Submit",style={"position":"absolute","left":"-9999px"})
+                div.vertical-center.history
+                    a(href="/history").pull-right History
 
-        #filters
-            span Search
-            form(action="/type", method="post")
-                input(type="hidden", name="queryParams", value=queryParams)
-                select(name="type",onchange="this.form.submit()")
-                    option(value="",selected= "" == type) All
-                    option(value="story",selected= "story" == type) Story
-                    option(value="comment",selected= "comment" == type) Comment
-            span by
-            form(action="/sort", method="post")
-                input(type="hidden", name="queryParams", value=queryParams)
-                select(name="sort",onchange="this.form.submit()")
-                    option(value="popularity",selected= "popularity" == sort) Popularity
-                    option(value="date",selected= "date" == sort) Date
-            span for
-            form(action="/dateRange", method="post")
-                input(type="hidden", name="queryParams", value=queryParams)
-                select(name="dateRange",onchange="this.form.submit()")
-                    option(value="", selected ="" == dateRange) All Time
-                    option(value="last24h", selected ="last24h" == dateRange) Last 24 hour
-                    option(value="pastWeek", selected ="pastWeek" == dateRange) Past week
-                    option(value="pastMonth", selected ="pastMonth" == dateRange) Past month
-                    option(value="pastYear", selected ="pastYear" == dateRange) Past Year
+            #filters
+                .container-fluid
+                    .row
+                        .col-sm-8(style={"display":"flex"})
+                            span Search
+                            form(action="/type", method="post")
+                                input(type="hidden", name="queryParams", value=queryParams)
+                                select(name="type",onchange="this.form.submit()")
+                                    option(value="",selected= "" == type) All
+                                    option(value="story",selected= "story" == type) Story
+                                    option(value="comment",selected= "comment" == type) Comment
+                            span by
+                            form(action="/sort", method="post")
+                                input(type="hidden", name="queryParams", value=queryParams)
+                                select(name="sort",onchange="this.form.submit()")
+                                    option(value="popularity",selected= "popularity" == sort) Popularity
+                                    option(value="byDate",selected= "date" == sort) Date
+                            span for
+                            form(action="/dateRange", method="post")
+                                input(type="hidden", name="queryParams", value=queryParams)
+                                select(name="dateRange",onchange="this.form.submit()")
+                                    option(value="", selected ="" == dateRange) All Time
+                                    option(value="last24h", selected ="last24h" == dateRange) Last 24 hour
+                                    option(value="pastWeek", selected ="pastWeek" == dateRange) Past week
+                                    option(value="pastMonth", selected ="pastMonth" == dateRange) Past month
+                                    option(value="pastYear", selected ="pastYear" == dateRange) Past Year
+                        .col-sm-4
+                            p(style={"text-align":"right"})
+                                span= count+ " results ("
+                                span= executionTime + ")"
 
         article#content
             .container-fluid

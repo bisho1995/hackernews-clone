@@ -40,7 +40,7 @@ block content
                                 input(type="hidden", name="queryParams", value=queryParams)
                                 select(name="sort",onchange="this.form.submit()")
                                     option(value="popularity",selected= "popularity" == sort) Popularity
-                                    option(value="byDate",selected= "date" == sort) Date
+                                    option(value="byDate",selected= "byDate" == sort) Date
                             span for
                             form(action="/dateRange", method="post")
                                 input(type="hidden", name="queryParams", value=queryParams)

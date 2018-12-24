@@ -1,7 +1,7 @@
 const moment = require('moment');
-const helper = require('../util/helper');
-const api = require('../Controllers/api');
 const perf = require('execution-time')();
+const helper = require('../util/helper');
+const api = require('../api');
 const userModel = require('../model/users/users');
 
 async function getUsername(token) {

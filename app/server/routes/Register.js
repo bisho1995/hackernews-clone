@@ -16,6 +16,9 @@ module.exports.post = async (req, res) => {
   if (password !== confirmPassword) {
     errors.push('Password and confirm password do not match');
   }
+  if (password.length <= 7 || password.length >= 40) {
+    errors.push('Password has to be of size more than 8 and less than 40');
+  }
   if (username.length < 6 || username.length > 40) {
     errors.push('Username has to be of size more than 6 and less than 40');
   }

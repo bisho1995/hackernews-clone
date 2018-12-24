@@ -101,10 +101,8 @@ module.exports.getHistory = user => new Promise((resolve, reject) => {
   });
 
 module.exports.updateHistory = (user, history) => new Promise((resolve, reject) => {
-    model
-      .findOneAndUpdate({ username: user }, { history })
-      .exec((err, doc) => {
-        if (err) reject(err);
-        else resolve(doc);
-      });
+    model.findOneAndUpdate({ username: user }, { history }).exec((err, doc) => {
+      if (err) reject(err);
+      else resolve(doc);
+    });
   });

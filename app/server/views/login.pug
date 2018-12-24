@@ -3,17 +3,18 @@ extends layout
 block title
     title Login
 
+block styles
+    link(rel='stylesheet', href='/css/login.css')
+
 block content
-    section.container
-        header
-            h1 Login Page
+    section.container#wrapper
         div
             if registrationSuccess
                 div 
                     div.alert.alert-success Registration was successful now log in
                     br
                     br
-        div
+        div#errors
             if errors
                 b There were some errors in your request
                 div
@@ -21,9 +22,13 @@ block content
                         div.alert.alert-danger= error
         article
             form(action="/login", method="POST")
+                h1.text-center Hacker news Login
                 label(for="username") Username
                 input.form-control(type="text", name="username", id="username", autofocus, placeholder="Enter your username or email")
                 label(for="password") Password
                 input.form-control(type="password", name="password", id="password", placeholder="Enter your password")
                 br
-                input.btn.btn-primary(type="submit", value="Login")
+                input.btn#login(type="submit", value="Login")
+                br
+                span Done have an account ?
+                a(href="/register") Register

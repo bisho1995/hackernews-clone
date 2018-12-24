@@ -3,17 +3,19 @@ extends layout
 block title
     title Register
 
+block styles
+    link(rel='stylesheet', href='/css/register.css')
+
 block content
-    section
-        header
-            h1 Register Page
+    section.container#wrapper
         article.container
-            div
+            div#errors
                 if errors 
                     b Account could not be created due to one or more of the below errors
                     each error in errors
                         div.alert.alert-danger= error
             form(action="/register", method="post")
+                h1.text-center Hacker news Registration
                 label(for="username") Username
                 input.form-control(type="text", name="username", id="username", autofocus, placeholder="Enter your username", required)
                 label(for="email") Email
@@ -23,4 +25,7 @@ block content
                 label(for="confirmPassword") Confirm Password
                 input.form-control(type="password", name="confirmPassword", id="confirmPassword", placeholder="Enter your password again", required)
                 br
-                input.btn.btn-primary(type="submit", value="Register")
+                input.btn#register(type="submit", value="Register")
+                br
+                span Already got an account ?
+                a(href="/login") Login

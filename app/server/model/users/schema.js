@@ -1,5 +1,5 @@
-const mongoose = require("mongoose");
-const connection = require("../db");
+const mongoose = require('mongoose');
+const connection = require('../db');
 
 const schema = new mongoose.Schema({
   username: {
@@ -21,7 +21,16 @@ const schema = new mongoose.Schema({
     required: false,
     default: '',
   },
-  history: [String],
+  history: [
+    {
+      url: {
+        type: String,
+      },
+      time: {
+        type: String,
+      },
+    },
+  ],
 });
 
 const model = connection.model('users', schema);

@@ -8,7 +8,11 @@ async function getUsername(token) {
 }
 
 module.exports = async (req, res) => {
-  const username = await getUsername(req.session.token);
-  const history = await userModel.getHistory(username);
-  res.status(200).render('history', { history });
+  if (!(await helper.routeGuard(req))) {
+    res.status(200).redirect('/login');
+  } else {
+    const username = await getUsername(req.session.token);
+    const history = await userModel.getHistory(username);
+    res.status(200).render('history', { history });
+  }
 };

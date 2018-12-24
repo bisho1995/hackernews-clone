@@ -8,17 +8,21 @@ async function getUsername(token) {
 }
 
 module.exports = async (req, res) => {
-  const { search, queryParams } = req.body;
-  const queryParamsGenerated =    helper.generateURLforSearch(JSON.parse(queryParams)) + search;
-
-  const username = await getUsername(req.session.token);
-  const history = await userModel.getHistory(username);
-  if (history.length < 5) {
-    history.push(queryParamsGenerated);
+  if (!(await helper.routeGuard(req))) {
+    res.status(200).redirect('/login');
   } else {
-    history.shift();
-    history.push(queryParamsGenerated);
+    const { search, queryParams } = req.body;
+    const queryParamsGenerated =      helper.generateURLforSearch(JSON.parse(queryParams)) + search;
+
+    const username = await getUsername(req.session.token);
+    const history = await userModel.getHistory(username);
+    if (history.length < 5) {
+      history.push(queryParamsGenerated);
+    } else {
+      history.shift();
+      history.push(queryParamsGenerated);
+    }
+    console.log(await userModel.updateHistory(username, history));
+    res.status(200).redirect(`/${queryParamsGenerated}`);
   }
-  console.log(await userModel.updateHistory(username, history));
-  res.status(200).redirect(`/${queryParamsGenerated}`);
 };

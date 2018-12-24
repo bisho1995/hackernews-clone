@@ -1,7 +1,7 @@
 const helper = require('../util/helper');
 
 module.exports = (req, res) => {
-  const { search } = req.body;
-  const queryParams = helper.generateURLforSearch(req.query) + search;
-  res.status(200).redirect(`/${queryParams}`);
+  const { search, queryParams } = req.body;
+  const queryParamsGenerated =    helper.generateURLforSearch(JSON.parse(queryParams)) + search;
+  res.status(200).redirect(`/${queryParamsGenerated}`);
 };

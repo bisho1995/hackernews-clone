@@ -43,6 +43,7 @@ module.exports = async (req, res) => {
           type: req.query.type,
           sort: req.query.sort,
           dateRange: req.query.dateRange,
+          queryParams: JSON.stringify(req.query),
         });
       })
       .catch((err) => {

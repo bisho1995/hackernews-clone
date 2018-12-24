@@ -1,8 +1,7 @@
 const helper = require('../util/helper');
 
 module.exports = (req, res) => {
-  const { dateRange } = req.body;
-  const queryParams = helper.generateURLforDateRange(req.query) + dateRange;
-  console.log(queryParams);
-  res.status(200).redirect(`/${queryParams}`);
+  const { dateRange, queryParams } = req.body;
+  const queryParamsGenerated =    helper.generateURLforDateRange(JSON.parse(queryParams)) + dateRange;
+  res.status(200).redirect(`/${queryParamsGenerated}`);
 };

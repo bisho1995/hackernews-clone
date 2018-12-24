@@ -20,17 +20,13 @@ module.exports = async (req, res) => {
     if (history.length < 5) {
       history.push({
         url: queryParamsGenerated,
-        time: moment()
-          .toDate()
-          .getTime(),
+        time: moment().format('YYYY-MM-DD HH:mm:ss'),
       });
     } else {
       history.shift();
       history.push({
         url: queryParamsGenerated,
-        time: moment()
-          .toDate()
-          .getTime(),
+        time: moment().format('YYYY-MM-DD HH:mm:ss'),
       });
     }
     console.log(await userModel.updateHistory(username, history));

@@ -20,4 +20,5 @@ block content
             each past in history
                 div
                     li
-                        a(href="/"+past, target="_blank")= "/"+past
+                        a(href="/"+past.url, target="_blank")= "/"+past.url
+                        span= " at " + past.time

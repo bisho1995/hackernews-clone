@@ -13,6 +13,7 @@ module.exports = async (req, res) => {
   } else {
     const username = await getUsername(req.session.token);
     const history = await userModel.getHistory(username);
+    console.log(history);
     res.status(200).render('history', { history });
   }
 };

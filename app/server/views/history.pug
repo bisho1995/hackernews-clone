@@ -1,0 +1,10 @@
+extends layout
+
+block title
+    title History
+
+block content
+    h1 History
+    each past in history
+        div
+            a(href="/"+past, target="_blank")= past

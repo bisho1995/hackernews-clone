@@ -92,3 +92,19 @@ module.exports.userData = function (username) {
     });
   });
 };
+
+module.exports.getHistory = user => new Promise((resolve, reject) => {
+    model.findOne({ username: user }).exec((err, doc) => {
+      if (err) reject(err);
+      else resolve(doc.history);
+    });
+  });
+
+module.exports.updateHistory = (user, history) => new Promise((resolve, reject) => {
+    model
+      .findOneAndUpdate({ username: user }, { history })
+      .exec((err, doc) => {
+        if (err) reject(err);
+        else resolve(doc);
+      });
+  });

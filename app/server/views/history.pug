@@ -3,8 +3,20 @@ extends layout
 block title
     title History
 
+block styles
+    link(rel='stylesheet', href='/css/history.css')
+
 block content
-    h1 History
-    each past in history
-        div
-            a(href="/"+past, target="_blank")= past
+    section.container#wrapper
+        header
+            h1.text-center History
+        article.container-fluid
+        u
+            a(href="/") Home
+        br
+        br
+        ol
+            each past in history
+                div
+                    li
+                        a(href="/"+past, target="_blank")= "/"+past
